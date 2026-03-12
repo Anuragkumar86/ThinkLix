@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     const { oldPassword, newPassword, confirmPassword } = await req.json();
 
-    // ✅ Check current password
+    
     const isValid = await bcrypt.compare(oldPassword, user.password);
     if (!isValid) {
       return NextResponse.json(
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ✅ Check new === confirm
+
     if (newPassword !== confirmPassword) {
       return NextResponse.json(
         { message: "New password and confirm password do not match" },
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ✅ Optional: Enforce strong passwords
+  
     if (newPassword.length < 8) {
       return NextResponse.json(
         { message: "Password must be at least 8 characters long" },
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ✅ Hash new password before saving
+  
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     await prisma.user.update({

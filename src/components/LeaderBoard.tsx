@@ -7,7 +7,6 @@ interface LeaderboardProps {
   users: Pick<User, "id" | "name" | "image" | "totalScore" | "coins">[];
 }
 
-// Rank badge component
 const RankBadge = ({ rank }: { rank: number }) => {
   let style = "bg-gray-200 text-gray-800";
 

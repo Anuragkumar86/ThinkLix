@@ -8,9 +8,6 @@ import QuizCreationForm from "@/components/QuizCreationForm";
 
 export default async function CreateQuizPage() {
     const session = await getServerSession(authOptions);
-
-    // If the user is not authenticated or not an admin, redirect them immediately.
-    // This server-side check is the most important security measure.
     if (!session || session.user.role !== "ADMIN") {
         return redirect("/admin");
     }
@@ -24,7 +21,7 @@ export default async function CreateQuizPage() {
                 Build your quiz by adding a topic, details, and questions.
             </p>
             <div className="w-full max-w-4xl mx-auto">
-                {/* The client component is rendered here. */}
+               
                 <QuizCreationForm />
             </div>
         </div>

@@ -5,18 +5,17 @@ export default function AllSubTopicsSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-tr from-black via-gray-900 to-indigo-900 py-16 px-6 text-white animate-pulse">
       <div className="max-w-7xl mx-auto space-y-12">
-        {/* Header */}
+       
         <div className="text-center space-y-4">
           <div className="h-10 w-2/3 bg-gray-700 rounded-lg mx-auto" />
           <div className="h-4 w-1/2 bg-gray-600 rounded mx-auto" />
         </div>
 
-        {/* Search box */}
         <div className="flex justify-center">
           <div className="h-12 w-full max-w-md bg-gray-800 rounded-xl border border-cyan-700" />
         </div>
 
-        {/* Table (desktop) */}
+      
         <div className="hidden md:block bg-black bg-opacity-50 border border-cyan-700 rounded-3xl shadow-xl">
           <div className="divide-y divide-gray-700">
             {[...Array(5)].map((_, i) => (
@@ -33,7 +32,6 @@ export default function AllSubTopicsSkeleton() {
           </div>
         </div>
 
-        {/* Mobile Cards */}
         <div className="flex flex-col gap-6 md:hidden">
           {[...Array(3)].map((_, i) => (
             <div

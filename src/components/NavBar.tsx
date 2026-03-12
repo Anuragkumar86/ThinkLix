@@ -69,7 +69,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop nav + profile */}
+          {/* Desktop nav and profile */}
           <div className="hidden md:flex items-center space-x-10 text-cyan-300 font-semibold select-none">
 
             <Link href="/fields" className="hover:text-pink-400 transition-colors duration-300">Fields</Link>

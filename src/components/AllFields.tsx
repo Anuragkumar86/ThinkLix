@@ -71,7 +71,7 @@ export default function AllFields({ fields }: fieldProps){
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full px-2 sm:px-3 md:px-4 lg:px-8 xl:px-16">
             {filteredFields.length ? (
               filteredFields.map((field, index) => {
-                const cardColor = colors[index % colors.length]; // cycle colors
+                const cardColor = colors[index % colors.length];
                 return (
                   <Link
                     href={`/fields/${field.name.toLowerCase().replace(/\s/g, "-")}`}

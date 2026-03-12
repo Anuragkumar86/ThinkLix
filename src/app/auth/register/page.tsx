@@ -61,7 +61,7 @@ export default function RegisterPage() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-900 pt-20">
       <div className="flex w-full max-w-6xl h-[100%] rounded-3xl overflow-hidden shadow-2xl">
-        {/* Left: Glassmorphic Register Form */}
+        {/* Left Register Form */}
         <div className="w-full md:w-1/2 flex flex-col justify-center p-12 bg-gray-900/70 backdrop-blur-xl rounded-l-3xl shadow-2xl text-gray-200 border border-gray-800">
           <h2 className="text-4xl font-extrabold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-indigo-500 to-pink-500">
             Create Account
@@ -157,7 +157,7 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        {/* Right: Gradient Thoughts Section */}
+        {/* Right Thoughts Section */}
         <div className="hidden md:flex w-1/2 items-center justify-center bg-gradient-to-tr from-purple-700 via-indigo-800 to-pink-700 p-10">
           <div className="text-center px-6">
             <h3 className="text-3xl font-bold text-white mb-4">Thoughts for Life</h3>

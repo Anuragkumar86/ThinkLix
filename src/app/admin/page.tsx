@@ -1,12 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import AdminUserManagement from "@/components/AdminUserManagement";
-import Link from "next/link"; // Import the Link component
+import Link from "next/link"; 
 
 export default async function AdminPage() {
     const session = await getServerSession(authOptions);
 
-    // If the user is not authenticated or is not an admin, redirect them immediately.
     if (!session || session.user.role !== "ADMIN") {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4">
@@ -34,7 +33,6 @@ export default async function AdminPage() {
                 Manage users and create new quizzes from here.
             </p>
 
-            {/* New section for Quiz Management */}
             <div className="mt-12 w-full max-w-6xl mx-auto p-6 bg-white rounded-xl shadow-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
                     Quiz Management
@@ -50,7 +48,6 @@ export default async function AdminPage() {
             </div>
 
             <div className="mt-12 w-full max-w-6xl mx-auto">
-                {/* The client component for user management */}
                 <AdminUserManagement />
             </div>
         </div>

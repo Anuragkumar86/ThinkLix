@@ -1,4 +1,4 @@
-// SpecificFieldTopics.tsx
+
 "use client"
 import { Field, Topic } from "@prisma/client";
 import { useSession } from "next-auth/react";

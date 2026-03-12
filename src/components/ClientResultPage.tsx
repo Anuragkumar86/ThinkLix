@@ -72,9 +72,9 @@ export default function ClientResultsPage({ attemptId }: ClientResultsPageProps)
   ) => {
 
     if (!session || !session.user || !session.user.id) {
-      // You can replace this with a more visible message box or alert
+      
       console.error("You must be logged in to use this feature.");
-      // We'll also return early to prevent the API call
+      
       return;
     }
 
@@ -96,7 +96,7 @@ export default function ClientResultsPage({ attemptId }: ClientResultsPageProps)
       if (axios.isAxiosError(err)) {
         const backendMessage = err.response?.data?.message || "Failed to get explanation.";
         setError(backendMessage);
-        toast.error(backendMessage); // show toast to user
+        toast.error(backendMessage);
       } else {
         setError("Unexpected error occurred.");
         toast.error("Unexpected error occurred.");

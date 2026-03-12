@@ -21,7 +21,6 @@ export async function POST(req: Request) {
 
         const userId = session.user.id;
 
-        // 1. Fetch the user's current coin balance
         const user = await prisma.user.findUnique({
             where: { id: userId },
             select: { coins: true }
@@ -30,13 +29,10 @@ export async function POST(req: Request) {
         if (!user) {
             return NextResponse.json({ error: "User not found." }, { status: 404 });
         }
-
-        // 2. Check if the user has enough coins
         if (user.coins < cost) {
             return NextResponse.json({ error: "Not enough coins." }, { status: 403 });
         }
 
-        // 3. Deduct the coins from the user's account
         await prisma.user.update({
             where: { id: userId },
             data: { coins: { decrement: cost } }

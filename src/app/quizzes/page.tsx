@@ -23,7 +23,7 @@ export default async function QuizzesPage() {
     }
   }
 
-  // Conditionally render the component based on the data
+  
   if (errorMessage) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-center p-4 bg-gray-50 dark:bg-gray-900">

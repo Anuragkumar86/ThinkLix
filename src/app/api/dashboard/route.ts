@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const skip = (page - 1) * pageSize;
 
   try {
-    // 1. Fetch the paginated data for the table display
+  
     const quizAttempts = await prisma.quizAttempt.findMany({
       where: { userId: session.user.id },
       orderBy: {
@@ -40,30 +40,24 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // 2. Fetch ALL attempts for summary statistics
     const allQuizAttempts = await prisma.quizAttempt.findMany({
       where: { userId: session.user.id },
       include: {
         quiz: {
           include: {
-            questions: true, // Only need questions to calculate score percentage
+            questions: true, 
             topic: true
           },
         },
       },
     });
 
-    // 3. Calculate summary statistics on the FULL dataset
     const totalAttemptsCount = allQuizAttempts.length;
 
     const totalPassed = allQuizAttempts.filter(attempt => {
         const totalQuestions = attempt.quiz.questions.length;
         return (attempt.score / totalQuestions) * 100 >= 60;
     }).length;
-
-    // const totalScoreSum = allQuizAttempts.reduce((sum, attempt) => sum + attempt.score, 0);
-    // const averageScore = totalAttemptsCount > 0 ? (totalScoreSum / totalAttemptsCount) : 0;
-  
 
     const totalPercentageSum = allQuizAttempts.reduce((sum, attempt) => {
         const totalQuestions = attempt.quiz.questions.length;
@@ -74,11 +68,11 @@ export async function GET(request: NextRequest) {
     const averagePercentage = totalAttemptsCount > 0 ? totalPercentageSum / totalAttemptsCount : 0;
 
     return NextResponse.json({
-      quizAttempts, // Paginated data for the table
-      totalCount: totalAttemptsCount, // Total count for pagination
-      quizzesPassedCount: totalPassed, // Overall count of passed quizzes
-      averagePercentage: averagePercentage, // Overall average score percentage
-      allAttemptsForRetake: allQuizAttempts // Send all attempts for "Quizzes to Retake"
+      quizAttempts,
+      totalCount: totalAttemptsCount, 
+      quizzesPassedCount: totalPassed, 
+      averagePercentage: averagePercentage,
+      allAttemptsForRetake: allQuizAttempts 
     });
   } catch (err) {
     console.error("Error fetching dashboard data:", err);

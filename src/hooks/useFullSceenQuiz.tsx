@@ -10,7 +10,7 @@ export function useFullscreenQuiz(
   const [violationCount, setViolationCount] = useState(0);
 
   useEffect(() => {
-    // ✅ Force fullscreen on mount
+    
     const enterFullscreen = async () => {
       if (!document.fullscreenElement) {
         try {
@@ -22,7 +22,7 @@ export function useFullscreenQuiz(
     };
     enterFullscreen();
 
-    // ✅ Detect fullscreen exit
+    
     const handleFullscreenChange = () => {
       const isFullscreen = !!document.fullscreenElement;
       if (!isFullscreen && !quizSubmitted) {
@@ -33,21 +33,21 @@ export function useFullscreenQuiz(
       }
     };
 
-    // ✅ Detect tab switching / window blur
+   
     const handleVisibilityChange = () => {
       if (document.hidden && !quizSubmitted) {
         setViolationCount((count) => Math.min(count + 1, 3));
       }
     };
 
-    // ✅ Detect back/forward navigation
+    
     const handlePopState = () => {
       if (!quizSubmitted) {
         onForceSubmit();
       }
     };
 
-    // ✅ Detect page refresh / close
+    
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (!quizSubmitted) {
         e.preventDefault();
@@ -70,7 +70,7 @@ export function useFullscreenQuiz(
     };
   }, [quizSubmitted, onForceSubmit]);
 
-  // ✅ Auto-submit after 3 violations
+
   useEffect(() => {
     if (violationCount >= 3 && !quizSubmitted) {
       onForceSubmit();

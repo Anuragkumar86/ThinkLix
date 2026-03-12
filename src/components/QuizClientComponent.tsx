@@ -27,12 +27,10 @@ export default function QuizClientComponent({ quiz }: { quiz: QuizWithQuestions 
   const [isSubmitModelOpen, setIsSubmitModelOpen] = useState<boolean>(false)
   const [confirmSubmmit, setConfirmSubmmit] = useState("")
 
-  // -------------------------------------------------------------------
-  // SUBMIT LOGIC
-  // -------------------------------------------------------------------
+
   const handleSubmitQuiz = useCallback(async () => {
 
-    if (quizSubmitted) return; // 🚨 prevent multiple calls
+    if (quizSubmitted) return; 
     setQuizSubmitted(true);
     
     try {
@@ -44,12 +42,12 @@ export default function QuizClientComponent({ quiz }: { quiz: QuizWithQuestions 
 
 
       toast.success("Test Submitted Successfully", { duration: 7000, style: { background: "green", color: "white" } });
-      // Exit fullscreen
+     
       if (document.fullscreenElement) {
         try {
           await document.exitFullscreen();
         } catch {
-          /* ignore */
+          
         }
       }
 
@@ -66,9 +64,7 @@ export default function QuizClientComponent({ quiz }: { quiz: QuizWithQuestions 
     }
   }, [quiz.id, userAnswers, timeLeft, router]);
 
-  // -------------------------------------------------------------------
-  // TIMER
-  // -------------------------------------------------------------------
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {

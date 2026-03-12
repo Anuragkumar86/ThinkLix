@@ -1,4 +1,4 @@
-// src/components/LayoutWrapper.tsx
+
 "use client";
 
 import { usePathname } from 'next/navigation';
@@ -6,7 +6,7 @@ import Navbar from "@/components/NavBar";
 import Providers from "@/app/providers";
 import { Toaster } from "react-hot-toast";
 import { Geist, Geist_Mono } from "next/font/google";
-// import "./globals.css";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

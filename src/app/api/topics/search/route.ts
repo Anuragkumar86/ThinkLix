@@ -13,7 +13,7 @@ export async function GET(req: Request) {
       where: {
         name: {
           contains: q,
-          mode: "insensitive", // case-insensitive search
+          mode: "insensitive", 
         },
       },
       take: 10,

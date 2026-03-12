@@ -1,6 +1,6 @@
 name: ThinkLix CI Checks
 
-# 1. Trigger Definition: Runs on pushes to main and all Pull Requests targeting main
+
 on:
   push:
     branches:
@@ -9,40 +9,39 @@ on:
     branches:
       - main
 
-# 2. Jobs Definition
+
 jobs:
   build-and-test:
-    # A. Environment Setup
+   
     runs-on: ubuntu-latest
     
-    # B. Define the execution steps
+    
     steps:
       
-      # Step 1: Checkout Code
+      
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js and Caching
+      
       - name: Setup Node.js and npm cache
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # Cache node_modules using npm's lock file
+          cache: 'npm' 
           
-      # Step 3: Install Dependencies
-      # npm ci is faster and ensures clean, reproducible installs from package-lock.json
+     
       - name: Install dependencies
         run: npm ci 
 
-      # Step 4: Quality Gate 1: TypeScript Check (Type Safety)
+     
       - name: Run TypeScript type check
         run: npm run type-check
 
-      # Step 5: Quality Gate 2: Linting Check (Code Style & Static Errors)
+      
       - name: Run ESLint check
         run: npm run lint
         
-      # Step 6: Quality Gate 3: Production Build Check
+      
       - name: Run Next.js build check
         run: npm run build
         env:

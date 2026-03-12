@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 
-
-// A single, well-named interface for user data
 interface User {
     id: string;
     name: string;
@@ -18,56 +16,54 @@ interface User {
 }
 
 export default function AdminUserManagement() {
-
-    // Get the session data and the update function
     const { data: session, status, update } = useSession();
     const [error, setError] = useState<string>("");
     const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
         const getUsers = async () => {
-            // Check for authentication and authorization status
+            
             if (status !== 'authenticated' || session?.user?.role !== "ADMIN") {
-                // If not authenticated or not an admin, set an error message and exit
+                
                 setError("Unauthorized access. This page is for administrators only.");
                 return;
             }
 
             try {
-                // Make the API call to fetch users
+                
                 const response = await axios.get("/api/admin/maintain-user");
                 setUsers(response.data.users);
-                setError(""); // Clear any previous errors
+                setError(""); 
             } catch{
                 setError("Unable to fetch Users. Please check the API.");
             }
         };
 
-        // Call the function only when the session status is 'authenticated'
+       
         if (status === 'authenticated') {
             getUsers();
         }
-    }, [session, status]); // The useEffect hook will re-run when the session or status changes
+    }, [session, status]); 
 
     const handleRoleChange = async (user: User) => {
-        // We can get the new role directly from the current user object
+     
         const newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
 
         try {
-            // Call the new backend API to update the role in the database
+            
             await axios.post("/api/admin/update-user-role", {
                 userId: user.id,
                 newRole: newRole,
             });
 
-            // The key step: Tell NextAuth to re-fetch the session data from the server.
+            
             await update();
 
-            // Refetch the user list from the API to update the UI
+          
             const response = await axios.get("/api/admin/maintain-user");
             setUsers(response.data.users);
 
-            // Provide user feedback
+            
             toast.success("User role updated successfully!");
 
         } catch{

@@ -1,16 +1,16 @@
 export default function LeaderboardSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 to-pink-900 p-4 sm:p-8 animate-pulse">
-      {/* Header */}
+  
       <header className="text-center mb-10">
         <div className="h-10 w-80 bg-yellow-400/40 rounded-lg mx-auto mb-3"></div>
         <div className="h-5 w-64 bg-gray-300/40 dark:bg-gray-600 rounded mx-auto"></div>
       </header>
 
       <div className="max-w-4xl mx-auto">
-        {/* Desktop Table */}
+        
         <div className="hidden sm:block bg-white rounded-2xl shadow-2xl overflow-hidden">
-          {/* Table Header */}
+         
           <div className="grid grid-cols-10 gap-2 p-4 border-b border-gray-200 bg-indigo-50">
             <div className="h-4 w-10 bg-gray-300 rounded mx-auto"></div>
             <div className="h-4 w-12 bg-gray-300 rounded mx-auto"></div>
@@ -19,7 +19,6 @@ export default function LeaderboardSkeleton() {
             <div className="h-4 w-16 bg-gray-300 rounded mx-auto col-span-2"></div>
           </div>
 
-          {/* Rows */}
           <div className="divide-y divide-gray-100">
             {[...Array(10)].map((_, i) => (
               <div
@@ -47,7 +46,7 @@ export default function LeaderboardSkeleton() {
           </div>
         </div>
 
-        {/* Mobile Cards */}
+  
         <div className="sm:hidden space-y-4">
           {[...Array(6)].map((_, i) => (
             <div

@@ -23,7 +23,7 @@ export default function RetakeButton({ quizId, topicNameSlug, quizTitle, onRetak
 
       if (response.status === 200) {
         if (onRetake) {
-          onRetake(); // show directions modal
+          onRetake(); 
         } else {
           router.push(`/quizzes/${topicNameSlug}/${quizTitle.replaceAll(" ", "-")}`);
         }

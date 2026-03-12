@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
         }
 
         const result = await prisma.$transaction(async (tx) => {
-            // 1. Find or create the Topic
+            
             const field = await tx.field.upsert({
                 where: { name: fieldName },
                 update: {},
@@ -56,9 +56,7 @@ export async function POST(req: NextRequest) {
                 create: { name: topicName, fieldId: field.id }
             });
 
-            //  Find or create the Field
-
-            // 2. Find or create the Quiz based on the title AND topicId
+            
             const newQuiz = await tx.quiz.upsert({
                 where: {
                     topicId_title: {

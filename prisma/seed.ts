@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Start seeding...");
 
-  // Clean up existing data to prevent duplicates
   await prisma.quizAttempt.deleteMany();
   await prisma.question.deleteMany();
   await prisma.quiz.deleteMany();
@@ -15,12 +14,12 @@ async function main() {
 
 
   
-  // 1️⃣ Create Fields
+
   const scienceField = await prisma.field.create({ data: { name: "Science" } });
   const historyField = await prisma.field.create({ data: { name: "History" } });
   const csField = await prisma.field.create({ data: { name: "Computer Science" } });
 
-  // 2️⃣ Create Topics + Quizzes + Questions
+
   const topicsData = [
     {
       name: "Science",
@@ -98,12 +97,12 @@ async function main() {
     },
   ];
 
-  // Loop through topics and create them with nested quizzes + questions
+
   for (const topicData of topicsData) {
     await prisma.topic.create({
       data: {
         name: topicData.name,
-        field: { connect: { id: topicData.field.id } }, // Link to Field
+        field: { connect: { id: topicData.field.id } },
         quizzes: {
           create: topicData.quizzes.map((quiz) => ({
             title: quiz.title,

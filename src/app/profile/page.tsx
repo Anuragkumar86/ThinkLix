@@ -278,7 +278,6 @@ export default function MyProfilePage() {
         </div>
       )}
 
-      {/* custom hide-scrollbar utility for email overflow */}
       <style>{`
         .hide-scrollbar {
           scrollbar-width: none;

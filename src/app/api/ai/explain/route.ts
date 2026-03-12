@@ -1,18 +1,15 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 import axiosInstance from '@/lib/axiosInstance';
-import { isRateLimited } from '@/lib/rate-limiter'; // Import our new rate limiter
+import { isRateLimited } from '@/lib/rate-limiter'; 
 
 export async function POST(request: Request) {
     const requestBody = await request.json();
     const { userId, question, options, userAnswer } = requestBody;
-
-    // Check if a userId was provided. If not, return an error.
     if (!userId) {
         return NextResponse.json({ error: 'User ID is required.' }, { status: 400 });
     }
 
-    // Use our new Redis-backed rate limiter.
     const rateLimited = await isRateLimited(userId);
     if (rateLimited) {
         return NextResponse.json(
@@ -26,9 +23,6 @@ export async function POST(request: Request) {
         );
     }
 
-
-
-    // The rest of your API logic remains the same.
     if (!question || !options) {
         return NextResponse.json({ error: 'Missing required question details.' }, { status: 400 });
     }
@@ -61,13 +55,11 @@ export async function POST(request: Request) {
         }],
         generationConfig: {
             temperature: 0.7,
-            topP: 0.95,
             topK: 40
         }
     };
 
     const apiKey = process.env.GEMINI_API_KEY;
-    // Change to the lightest model: gemini-2.5-flash-lite
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;;
 
     try {

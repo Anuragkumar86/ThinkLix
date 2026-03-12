@@ -4,14 +4,14 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
 
-// Define the shape of a single question
+
 interface QuestionData {
     text: string;
     options: string[];
     correctAnswer: string;
 }
 
-// Define the shape of the entire form's payload
+
 interface QuizPayload {
     fieldName: string;
     topicName: string;
@@ -22,7 +22,7 @@ interface QuizPayload {
 }
 
 export default function QuizCreationForm() {
-    // State to hold the form data
+
     const [formData, setFormData] = useState<QuizPayload>({
         fieldName: "",
         topicName: "",
@@ -32,14 +32,13 @@ export default function QuizCreationForm() {
         questions: [],
     });
 
-    // State for the bulk import text
     const [bulkQuestions, setBulkQuestions] = useState("");
 
-    // State for loading and error messages
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Handles changes to the main quiz details
+   
     const handleQuizChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -48,18 +47,18 @@ export default function QuizCreationForm() {
         });
     };
 
-    // Handles the parsing and addition of questions from the bulk import text area
+    
     const handleBulkImport = () => {
-        // Split the entire text block by the unique delimiter "---"
+        
         const questionBlocks = bulkQuestions.split("---").filter(block => block.trim() !== "");
 
         const newQuestions: QuestionData[] = [];
 
         for (const block of questionBlocks) {
-            // Split each question block by the "|" delimiter
+           
             const parts = block.split("|").map(part => part.trim());
 
-            if (parts.length >= 6) { // Make sure we have at least text, 4 options, and an answer
+            if (parts.length >= 6) { 
                 const [text, ...options] = parts;
                 const correctAnswer = options.pop() || "";
                 newQuestions.push({
@@ -77,11 +76,10 @@ export default function QuizCreationForm() {
             ...formData,
             questions: [...formData.questions, ...newQuestions],
         });
-        setBulkQuestions(""); // Clear the text area after import
+        setBulkQuestions("");
         toast.success(`${newQuestions.length} questions added successfully!`);
     };
 
-    // Handles the final submission of the entire quiz
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (formData.questions.length === 0) {
@@ -95,7 +93,6 @@ export default function QuizCreationForm() {
         try {
             await axios.post("/api/admin/create-quiz", formData);
             toast.success("Quiz created successfully!");
-            // Reset the entire form after successful submission
             setFormData({
                 fieldName: "",
                 topicName: "",

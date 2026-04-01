@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "prisma db seed",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "ci-build": "prisma generate && next build --skip-fetch-compiler"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

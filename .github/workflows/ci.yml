@@ -43,7 +43,7 @@ jobs:
         
       
       - name: Run Next.js build check
-        run: npm run build
+        run: npm run ci-build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           REDIS_URL: ${{ secrets.REDIS_URL }}
